@@ -4,6 +4,8 @@
 
 [<- Workshop 3](../Workshop03/README.md)
 
+[Workshop 5 ->](../Workshop05/README.md)
+
 # Workshop 4
 
 ## 1. Crear archivo tar.gz y omitir los "node_modules" y "vendor"
