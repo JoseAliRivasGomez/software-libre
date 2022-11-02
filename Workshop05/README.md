@@ -135,8 +135,8 @@
             on it.product_id = p.id
         join inventory_transaction_types itt
             on it.transaction_type = itt.id
-        where it.transaction_created_date between '2006-03-22' and '2006-03-24'
-        group by it.id
+        where date(it.transaction_created_date) between '2006-03-22' and '2006-03-24'
+        group by p.id, it.transaction_type
 		order by p.product_name asc;
 
 ![Challenge #7](./images/7.png)
@@ -146,8 +146,8 @@
     select p.product_code as `Codigo`,
         p.product_name as `Producto`,
         sum(if(it.transaction_type = 1, it.quantity, 0)) as `Ingresos`,
-        sum(if(it.transaction_type > 1, it.quantity, 0)) as `Salidas`,
-        sum(if(it.transaction_type = 1, it.quantity, 0)) - sum(if(it.transaction_type > 1, it.quantity, 0)) as `Disponible`
+        sum(if(it.transaction_type in (2,3,4), it.quantity, 0)) as `Salidas`,
+        (sum(if(it.transaction_type = 1, it.quantity, 0)) - sum(if(it.transaction_type in (2,3,4), it.quantity, 0))) as `Disponible`
         from products p
         join inventory_transactions it
             on it.product_id = p.id
