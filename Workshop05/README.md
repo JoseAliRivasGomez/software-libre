@@ -154,3 +154,35 @@
         group by p.id;
 
 ![Challenge #8](./images/8.png)
+
+## 13. Challenge #9: El mejor cliente
+
+    select concat(c.first_name, ' ', c.last_name) as `Cliente`,
+        round(sum(od.quantity * od.unit_price), 2) as `Monto`
+        from customers c
+        join orders o
+            on o.customer_id = c.id
+        join order_details od
+            on od.order_id = o.id
+        join invoices i
+            on i.order_id = o.id
+        group by c.id
+        order by `Monto` desc
+        limit 5;
+
+![Challenge #9](./images/9.png)
+
+## 14. Challenge #10: El mejor mes
+
+    select date_format(i.invoice_date, "%Y") as `Ano`,
+        date_format(i.invoice_date, "%m") as `Mes`,
+        round(sum(od.quantity * od.unit_price), 2) as `Monto`
+        from invoices i
+        join orders o
+            on o.id = i.order_id
+        join order_details od
+            on od.order_id = o.id
+        group by `Ano`, `Mes`
+        order by `Monto` desc;
+
+![Challenge #10](./images/10.png)
