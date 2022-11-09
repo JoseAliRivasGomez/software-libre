@@ -144,7 +144,7 @@
     #!/bin/bash
 
     site="northwind.isw811.xyz"
-    directory="/home/vagrant/backups/"$site"/"
+    directory="/home/vagrant/backups/"$site
     datetime=$(date +"%Y%m%d_%H%M%S")
     database="northwind"
     username="user_laravel"
@@ -159,6 +159,9 @@
     mkdir -p $directory
     cd $directory
 
+    echo "$filename" >> "$directory/backup_$site.log"
+    echo "Inicio: "$(date +"%d/%m/%Y %H:%M:%S") >> "$directory/backup_$site.log"
+
     echo "Iniciando respaldo..."
 
     mysqldump northwind > "$directory/$filename" -u $username --password=$password
@@ -171,6 +174,9 @@
 
     rm $filename
 
+    echo "Fin: "$(date +"%d/%m/%Y %H:%M:%S") >> "$directory/backup_$site.log"
+    echo >> "$directory/backup_$site.log"
+
 ## 9. En la maquina virtual:
 
     cd /vagrant
@@ -180,8 +186,25 @@
     ./backup-northwind.sh
     cd /home/vagrant/backups/northwind.isw811.xyz
     ls -lh
-    
+    cat backup_northwind.isw811.xyz.log
+
     cd /vagrant
     ./backup-northwind.sh martes
     cd /home/vagrant/backups/northwind.isw811.xyz
     ls -lh
+    cat backup_northwind.isw811.xyz.log
+
+    cd /vagrant
+    date
+    crontab -e
+    Seleccionar nano
+    Agregar debajo del ultimo comentario:
+        29 03 * 11 * /vagrant/backup-northwind.sh
+        * * * * * /vagrant/backup-northwind.sh
+    CTRL+O, ENTER, CTRL+X
+
+    cd /home/vagrant/backups/northwind.isw811.xyz
+    ls
+
+    cd ~
+    ls -la
