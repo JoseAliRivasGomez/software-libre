@@ -4,6 +4,8 @@
 
 [<- Workshop 4](../Workshop04/README.md)
 
+[Workshop 6 ->](../Workshop06/README.md)
+
 # Workshop 5
 
 ## 0. Instalar MySQL Workbench en Debian (anfitriona)
