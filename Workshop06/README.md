@@ -4,6 +4,8 @@
 
 [<- Workshop 5](../Workshop05/README.md)
 
+[Workshop 7 ->](../Workshop07/README.md)
+
 # Workshop 6
 
 ## 1. Crear archivo hello.sh en maquina anfitriona
