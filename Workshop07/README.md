@@ -64,7 +64,11 @@
         DB_PORT=6159
         DB_USERNAME=root
 
-    Configurar Build Command en Railway settings:
+    Esperar a que termine el primer Deploy
+
+    Generar dominio
+
+    Configurar Build Command en Railway settings y hacer otro Deploy:
         npm run build && php artisan optimize && php artisan migrate --force
 
 ![Resultado](./images/1.png)
